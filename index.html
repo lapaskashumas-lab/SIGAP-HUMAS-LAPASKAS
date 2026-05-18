@@ -1,0 +1,834 @@
+<!-- =========================
+FILE : index.html
+APLIKASI : SIGAP HUMAS
+INSTANSI : LAPAS KELAS III RANGKASBITUNG
+========================= -->
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SIGAP HUMAS</title>
+
+  <!-- FONT -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- ICON -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
+
+    body{
+      background:#f4f7fb;
+      overflow-x:hidden;
+    }
+
+    :root{
+      --primary:#0B3C91;
+      --secondary:#FFD447;
+      --white:#ffffff;
+      --dark:#1e293b;
+      --gray:#64748b;
+      --light:#f1f5f9;
+    }
+
+    .login-page{
+      width:100%;
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:linear-gradient(135deg,#0B3C91,#123d7a);
+      padding:20px;
+    }
+
+    .login-card{
+      background:white;
+      width:100%;
+      max-width:420px;
+      border-radius:20px;
+      padding:40px;
+      box-shadow:0 10px 40px rgba(0,0,0,0.2);
+    }
+
+    .login-logo{
+      text-align:center;
+      margin-bottom:30px;
+    }
+
+    .login-logo i{
+      font-size:60px;
+      color:var(--primary);
+      margin-bottom:10px;
+    }
+
+    .login-logo h1{
+      color:var(--primary);
+      font-size:28px;
+      font-weight:700;
+    }
+
+    .login-logo p{
+      color:#555;
+      font-size:14px;
+    }
+
+    .input-group{
+      margin-bottom:20px;
+    }
+
+    .input-group label{
+      display:block;
+      margin-bottom:8px;
+      font-size:14px;
+      color:#333;
+      font-weight:500;
+    }
+
+    .input-group input{
+      width:100%;
+      padding:14px;
+      border-radius:12px;
+      border:1px solid #ddd;
+      outline:none;
+    }
+
+    .login-btn{
+      width:100%;
+      background:var(--primary);
+      color:white;
+      border:none;
+      padding:14px;
+      border-radius:12px;
+      font-size:16px;
+      cursor:pointer;
+      font-weight:600;
+      transition:0.3s;
+    }
+
+    .login-btn:hover{
+      background:#082b68;
+    }
+
+    .main-app{
+      display:none;
+    }
+
+    .sidebar{
+      width:260px;
+      height:100vh;
+      background:var(--primary);
+      position:fixed;
+      left:0;
+      top:0;
+      padding:20px;
+      color:white;
+      overflow-y:auto;
+    }
+
+    .brand{
+      text-align:center;
+      margin-bottom:30px;
+    }
+
+    .brand i{
+      font-size:50px;
+      color:var(--secondary);
+      margin-bottom:10px;
+    }
+
+    .brand h2{
+      font-size:18px;
+    }
+
+    .menu{
+      margin-top:30px;
+    }
+
+    .menu-item{
+      padding:14px;
+      border-radius:12px;
+      margin-bottom:10px;
+      cursor:pointer;
+      transition:0.3s;
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .menu-item:hover{
+      background:rgba(255,255,255,0.1);
+    }
+
+    .topbar{
+      margin-left:260px;
+      background:white;
+      padding:20px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      box-shadow:0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .search-box{
+      background:#f1f5f9;
+      padding:10px 15px;
+      border-radius:12px;
+      width:350px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .search-box input{
+      border:none;
+      background:none;
+      outline:none;
+      width:100%;
+    }
+
+    .content{
+      margin-left:260px;
+      padding:25px;
+    }
+
+    .welcome{
+      margin-bottom:25px;
+    }
+
+    .welcome h1{
+      color:var(--dark);
+      margin-bottom:5px;
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:20px;
+      margin-bottom:25px;
+    }
+
+    .card{
+      background:white;
+      padding:25px;
+      border-radius:20px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .card i{
+      font-size:35px;
+      color:var(--primary);
+      margin-bottom:15px;
+    }
+
+    .card h3{
+      color:#555;
+      font-size:15px;
+      margin-bottom:10px;
+    }
+
+    .card h2{
+      font-size:30px;
+      color:var(--dark);
+    }
+
+    .grid-2{
+      display:grid;
+      grid-template-columns:2fr 1fr;
+      gap:20px;
+      margin-bottom:25px;
+    }
+
+    .table-container{
+      background:white;
+      padding:20px;
+      border-radius:20px;
+      overflow:auto;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+    }
+
+    table th{
+      background:var(--primary);
+      color:white;
+      padding:12px;
+      font-size:14px;
+    }
+
+    table td{
+      padding:12px;
+      border-bottom:1px solid #eee;
+      font-size:14px;
+    }
+
+    .btn{
+      padding:8px 12px;
+      border:none;
+      border-radius:8px;
+      cursor:pointer;
+      color:white;
+      margin:2px;
+      font-size:12px;
+    }
+
+    .btn-view{
+      background:#0ea5e9;
+    }
+
+    .btn-download{
+      background:#10b981;
+    }
+
+    .btn-delete{
+      background:#ef4444;
+    }
+
+    .upload-form{
+      background:white;
+      padding:25px;
+      border-radius:20px;
+      margin-top:20px;
+    }
+
+    .upload-form h2{
+      margin-bottom:20px;
+      color:var(--primary);
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:20px;
+    }
+
+    .form-group{
+      display:flex;
+      flex-direction:column;
+    }
+
+    .form-group label{
+      margin-bottom:8px;
+      font-size:14px;
+      font-weight:500;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea{
+      padding:12px;
+      border-radius:12px;
+      border:1px solid #ddd;
+      outline:none;
+    }
+
+    .submit-btn{
+      background:var(--primary);
+      color:white;
+      border:none;
+      padding:14px 20px;
+      margin-top:20px;
+      border-radius:12px;
+      cursor:pointer;
+      font-weight:600;
+    }
+
+    .calendar-box{
+      background:white;
+      padding:20px;
+      border-radius:20px;
+    }
+
+    .notes{
+      margin-top:15px;
+    }
+
+    .notes textarea{
+      width:100%;
+      height:120px;
+      border-radius:12px;
+      border:1px solid #ddd;
+      padding:12px;
+    }
+
+    .footer{
+      margin-left:260px;
+      background:var(--primary);
+      color:white;
+      padding:20px;
+      text-align:center;
+      margin-top:30px;
+    }
+
+    .chart-box{
+      background:white;
+      padding:20px;
+      border-radius:20px;
+    }
+
+    @media(max-width:768px){
+
+      .sidebar{
+        width:100%;
+        height:auto;
+        position:relative;
+      }
+
+      .topbar,
+      .content,
+      .footer{
+        margin-left:0;
+      }
+
+      .grid-2{
+        grid-template-columns:1fr;
+      }
+
+      .search-box{
+        width:100%;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<div class="login-page" id="loginPage">
+
+  <div class="login-card">
+
+    <div class="login-logo">
+      <i class="fa-solid fa-building-shield"></i>
+      <h1>SIGAP HUMAS</h1>
+      <p>LAPAS KELAS III RANGKASBITUNG</p>
+    </div>
+
+    <div class="input-group">
+      <label>Username</label>
+      <input type="text" id="username">
+    </div>
+
+    <div class="input-group">
+      <label>Password</label>
+      <input type="password" id="password">
+    </div>
+
+    <button class="login-btn" onclick="login()">
+      Login
+    </button>
+
+  </div>
+
+</div>
+
+<!-- MAIN -->
+<div class="main-app" id="mainApp">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <div class="brand">
+      <i class="fa-solid fa-folder-open"></i>
+      <h2>Lapas Kelas III Rangkasbitung</h2>
+    </div>
+
+    <div class="menu">
+
+      <div class="menu-item">
+        <i class="fa-solid fa-chart-line"></i>
+        Dashboard
+      </div>
+
+      <div class="menu-item">
+        <i class="fa-solid fa-folder"></i>
+        Daftar Arsip
+      </div>
+
+      <div class="menu-item">
+        <i class="fa-solid fa-upload"></i>
+        Unggah Arsip
+      </div>
+
+      <div class="menu-item">
+        <i class="fa-solid fa-newspaper"></i>
+        Berita & Kegiatan
+      </div>
+
+      <div class="menu-item">
+        <i class="fa-solid fa-file-excel"></i>
+        Rekap Laporan
+      </div>
+
+      <div class="menu-item" onclick="logout()">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Logout
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+
+    <div class="search-box">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" placeholder="Cari dokumen...">
+    </div>
+
+    <div id="clock"></div>
+
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <div class="welcome">
+      <h1>Selamat Datang Lapaskas</h1>
+      <p>Sistem Arsip Digital Dokumentasi Humas</p>
+    </div>
+
+    <!-- CARDS -->
+    <div class="cards">
+
+      <div class="card">
+        <i class="fa-solid fa-folder-open"></i>
+        <h3>Total Dokumentasi</h3>
+        <h2 id="totalArsip">0</h2>
+      </div>
+
+      <div class="card">
+        <i class="fa-solid fa-image"></i>
+        <h3>Kategori Foto</h3>
+        <h2>0</h2>
+      </div>
+
+      <div class="card">
+        <i class="fa-solid fa-video"></i>
+        <h3>Kategori Video</h3>
+        <h2>0</h2>
+      </div>
+
+      <div class="card">
+        <i class="fa-solid fa-file"></i>
+        <h3>Dokumen</h3>
+        <h2>0</h2>
+      </div>
+
+    </div>
+
+    <!-- GRID -->
+    <div class="grid-2">
+
+      <div class="chart-box">
+        <h2>Statistik Arsip</h2>
+        <canvas id="myChart"></canvas>
+      </div>
+
+      <div class="calendar-box">
+
+        <h2>Kalender Kegiatan</h2>
+
+        <p id="tanggalLengkap"></p>
+
+        <div class="notes">
+          <textarea placeholder="Tambah catatan kegiatan..."></textarea>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- TABLE -->
+    <div class="table-container">
+
+      <h2>Daftar Arsip</h2>
+
+      <br>
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>Nama Dokumen</th>
+            <th>Tanggal</th>
+            <th>Jenis</th>
+            <th>Keterangan</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+
+        <tbody id="arsipTable">
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <!-- UPLOAD -->
+    <div class="upload-form">
+
+      <h2>Unggah Arsip</h2>
+
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label>Nama Kegiatan</label>
+          <input type="text" id="namaKegiatan">
+        </div>
+
+        <div class="form-group">
+          <label>Tanggal</label>
+          <input type="date" id="tanggal">
+        </div>
+
+        <div class="form-group">
+          <label>Kategori</label>
+
+          <select id="kategori">
+            <option>Kegiatan Kepala Lapas</option>
+            <option>Pembinaan WBP</option>
+            <option>Humas</option>
+            <option>Pengamanan</option>
+            <option>Kunjungan</option>
+            <option>Kegiatan Hari Besar</option>
+            <option>Dokumentasi Internal</option>
+            <option>Apel</option>
+            <option>Rapat</option>
+            <option>Lainnya</option>
+          </select>
+
+        </div>
+
+        <div class="form-group">
+          <label>Jenis File</label>
+
+          <select id="jenis">
+            <option>Foto</option>
+            <option>Video</option>
+            <option>Dokumen</option>
+          </select>
+
+        </div>
+
+        <div class="form-group">
+          <label>Upload File</label>
+          <input type="file">
+        </div>
+
+        <div class="form-group">
+          <label>Link Berita Rilis</label>
+          <input type="text">
+        </div>
+
+      </div>
+
+      <div class="form-group" style="margin-top:20px;">
+        <label>Keterangan</label>
+        <textarea id="keterangan"></textarea>
+      </div>
+
+      <button class="submit-btn" onclick="tambahArsip()">
+        Simpan Arsip
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <h3>SIGAP HUMAS</h3>
+    <p>2026 - LAPAS KELAS III RANGKASBITUNG</p>
+    <p>Pemasyarakatan Pasti Bermanfaat Untuk Masyarakat</p>
+  </div>
+
+</div>
+
+<script>
+
+  // LOGIN
+
+  function login(){
+
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    if(username === 'admin' && password === 'lapaskaswow'){
+      localStorage.setItem('role','admin');
+      masuk();
+    }
+
+    else if(username === 'Pegawai' && password === 'wowpegawai'){
+      localStorage.setItem('role','user');
+      masuk();
+    }
+
+    else{
+      alert('Username atau Password salah');
+    }
+
+  }
+
+  function masuk(){
+    document.getElementById('loginPage').style.display='none';
+    document.getElementById('mainApp').style.display='block';
+  }
+
+  function logout(){
+    location.reload();
+  }
+
+  // CLOCK
+
+  function updateClock(){
+
+    const now = new Date();
+
+    document.getElementById('clock').innerHTML =
+    now.toLocaleString('id-ID');
+
+    document.getElementById('tanggalLengkap').innerHTML =
+    now.toDateString();
+
+  }
+
+  setInterval(updateClock,1000);
+
+  // DATA STORAGE
+
+  let arsip = JSON.parse(localStorage.getItem('arsip')) || [];
+
+  function renderTable(){
+
+    const table = document.getElementById('arsipTable');
+
+    table.innerHTML='';
+
+    arsip.forEach((item,index)=>{
+
+      table.innerHTML += `
+        <tr>
+          <td>${item.nama}</td>
+          <td>${item.tanggal}</td>
+          <td>${item.jenis}</td>
+          <td>${item.keterangan}</td>
+
+          <td>
+            <button class="btn btn-view">
+              Lihat
+            </button>
+
+            <button class="btn btn-download">
+              Unduh
+            </button>
+
+            <button class="btn btn-delete"
+            onclick="hapusArsip(${index})">
+              Hapus
+            </button>
+          </td>
+
+        </tr>
+      `;
+
+    });
+
+    document.getElementById('totalArsip').innerHTML =
+    arsip.length;
+
+  }
+
+  function tambahArsip(){
+
+    const nama =
+    document.getElementById('namaKegiatan').value;
+
+    const tanggal =
+    document.getElementById('tanggal').value;
+
+    const jenis =
+    document.getElementById('jenis').value;
+
+    const keterangan =
+    document.getElementById('keterangan').value;
+
+    const data = {
+      nama,
+      tanggal,
+      jenis,
+      keterangan
+    };
+
+    arsip.push(data);
+
+    localStorage.setItem(
+      'arsip',
+      JSON.stringify(arsip)
+    );
+
+    renderTable();
+
+    alert('Arsip berhasil disimpan');
+
+  }
+
+  function hapusArsip(index){
+
+    arsip.splice(index,1);
+
+    localStorage.setItem(
+      'arsip',
+      JSON.stringify(arsip)
+    );
+
+    renderTable();
+
+  }
+
+  renderTable();
+
+  // CHART
+
+  const ctx =
+  document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type:'bar',
+
+    data:{
+      labels:[
+        'Foto',
+        'Video',
+        'Dokumen'
+      ],
+
+      datasets:[{
+        label:'Total Arsip',
+        data:[0,0,0],
+        borderWidth:1
+      }]
+    }
+  });
+
+</script>
+
+</body>
+</html>
